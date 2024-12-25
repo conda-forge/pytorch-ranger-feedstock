@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pytorch_ranger-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pytorch_ranger-{{ version }}.tar.gz
   sha256: aa7115431cef11b57d7dd7bc86e7302a911dae467f62ec5d0b10e1ff744875db
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - pytorch >=1.7
 
 test:
@@ -30,6 +30,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/mpariente/Ranger-Deep-Learning-Optimizer
